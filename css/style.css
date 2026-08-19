@@ -1,0 +1,371 @@
+/* THE BREAKFAST TOLL — styled like it was made in 2006 during 4th period computer lab */
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+  --hot-pink: #ff3fa4;
+  --sky: #35c6ff;
+  --sun: #ffd400;
+  --grass: #35d16b;
+  --grape: #8a4fff;
+  --red: #ff2d2d;
+  --ink: #111;
+  --paper: #ffffff;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Comic Sans MS', 'Comic Neue', 'Chalkboard SE', cursive, sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* loud desktop-wallpaper-energy background so the white "slide" pops like a real PPT */
+  /* no background-attachment: fixed — it's janky/flickery on iOS Safari while scrolling */
+  background:
+    repeating-linear-gradient(45deg, var(--sky) 0 40px, var(--grape) 40px 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  padding-top: max(18px, env(safe-area-inset-top));
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
+}
+
+/* twinkly clip-art stars scattered over the background, because 2006 */
+body::before {
+  content: "★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦ ★ ✦";
+  position: fixed;
+  inset: 0;
+  color: rgba(255,255,255,0.35);
+  font-size: 28px;
+  line-height: 90px;
+  letter-spacing: 40px;
+  word-wrap: break-word;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  animation: twinkle 2.2s steps(2) infinite;
+}
+
+@keyframes twinkle {
+  50% { opacity: 0.4; }
+}
+
+/* ===== The "Slide" ===== */
+
+.slide-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  background: var(--paper);
+  border: 4px solid var(--ink);
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.45);
+  padding: 26px 22px 22px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-label {
+  position: absolute;
+  top: -18px;
+  left: 18px;
+  background: var(--sun);
+  border: 3px solid var(--ink);
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 13px;
+  transform: rotate(-3deg);
+}
+
+/* ===== WordArt-y headings ===== */
+
+h1, h2, .wordart {
+  font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  margin: 6px 0 14px;
+  color: var(--hot-pink);
+  -webkit-text-stroke: 1.5px var(--ink);
+  text-stroke: 1.5px var(--ink);
+  text-shadow:
+    3px 3px 0 var(--sun),
+    5px 5px 0 var(--ink);
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(30px, 8vw, 46px); }
+h2 { font-size: clamp(22px, 6vw, 30px); color: var(--sky); }
+
+p.subtitle {
+  text-align: center;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: -6px;
+  margin-bottom: 18px;
+}
+
+hr.dotted {
+  border: none;
+  border-top: 3px dotted var(--ink);
+  margin: 16px 0;
+}
+
+/* ===== Buttons: old-OS beveled 3D buttons ===== */
+
+.btn {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #f4f4f4, #cfcfcf);
+  border: 3px outset #e9e9e9;
+  padding: 14px 16px;
+  min-height: 48px;
+  cursor: pointer;
+  text-align: left;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn:active {
+  border-style: inset;
+  background: linear-gradient(180deg, #cfcfcf, #f4f4f4);
+}
+
+/* only apply hover on devices that actually have a mouse — otherwise mobile taps get stuck "hovered" */
+@media (hover: hover) {
+  .btn:hover {
+    background: linear-gradient(180deg, #fff7c2, #f2e28a);
+  }
+}
+
+.btn-big {
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  padding: 16px;
+  min-height: 54px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--sun), #ffb200);
+  border-color: #fff2b0;
+  margin-top: 10px;
+}
+
+@media (hover: hover) {
+  .btn-big:hover {
+    background: linear-gradient(180deg, #ffe680, var(--sun));
+  }
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Name entry (index.html) ===== */
+
+.name-other {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+input[type="text"], input[type="number"] {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+  border: 3px inset #ccc;
+  flex: 1;
+  width: 100%;
+}
+
+/* ===== Quiz slides (day1 / day2) ===== */
+
+.deck { position: relative; flex: 1; display: flex; flex-direction: column; }
+
+.step {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+
+.step.active {
+  display: flex;
+  animation: basicFade 0.35s ease;
+}
+
+/* the most advanced this site's transitions ever get. that's the joke. */
+@keyframes basicFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+progress {
+  width: 100%;
+  height: 22px;
+  margin-bottom: 4px;
+  accent-color: var(--hot-pink);
+}
+
+.progress-text {
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.q-text {
+  font-size: clamp(19px, 5.5vw, 24px);
+  font-weight: 700;
+  text-align: center;
+  margin: 4px 0 16px;
+}
+
+.q-photo {
+  display: block;
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  margin: 0 auto 16px;
+  border: 3px solid var(--ink);
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.choice-letter {
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 8px;
+  color: var(--hot-pink);
+}
+
+/* ===== Result slide ===== */
+
+.result {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 4px solid var(--ink);
+  padding: 24px 16px;
+}
+
+.result.correct { background: #d9ffe0; }
+.result.wrong { background: #ffd9d9; }
+.result.logged { background: #e4dcff; }
+
+.result-emoji {
+  font-size: 64px;
+  margin-bottom: 4px;
+}
+
+.result-headline {
+  font-size: clamp(24px, 7vw, 34px);
+  font-weight: 700;
+  margin: 4px 0 10px;
+}
+
+.result.correct .result-headline { color: #157a34; }
+.result.wrong .result-headline { color: #a10f0f; }
+.result.logged .result-headline { color: #4a2ea0; }
+
+.result-sub {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.result-photo {
+  max-width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  border: 3px solid var(--ink);
+  margin: 10px 0;
+}
+
+/* ===== Final score slide ===== */
+
+.final {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.score-box {
+  border: 4px solid var(--ink);
+  background: var(--sun);
+  padding: 18px 26px;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 12px 0 16px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+}
+
+.tier-caption {
+  font-weight: 700;
+  font-size: 18px;
+  max-width: 420px;
+  margin-bottom: 18px;
+}
+
+footer.byline {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 14px;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.blink {
+  animation: blinker 1s steps(2) infinite;
+}
+@keyframes blinker { 50% { opacity: 0; } }
+
+textarea {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+  border: 3px inset #ccc;
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--hot-pink);
+  height: 26px;
+}
+
+.range-value {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--hot-pink);
+}

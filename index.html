@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Breakfast Toll</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="slide-frame">
+    <div class="slide-label">Slide 1 of ∞</div>
+    <h1>🍳 THE BREAKFAST TOLL 🍳</h1>
+    <p class="subtitle">no pass, no plate. type your name to begin<span class="blink">_</span></p>
+
+    <hr class="dotted">
+
+    <h2 style="font-size:20px;">who's eating?</h2>
+    <div class="name-other">
+      <input type="text" id="customName" placeholder="type your name here" maxlength="30">
+    </div>
+
+    <button class="btn btn-big" id="proceedBtn" disabled>PROCEED TO TOLL BOOTH ➜</button>
+  </div>
+
+  <footer class="byline">made in ms paint & vibes. mobile-friendly, allegedly.</footer>
+
+  <script src="js/name.js"></script>
+  <script>
+    const customName = document.getElementById("customName");
+    const proceedBtn = document.getElementById("proceedBtn");
+
+    customName.addEventListener("input", updateProceed);
+
+    function updateProceed() {
+      proceedBtn.disabled = customName.value.trim().length === 0;
+    }
+
+    proceedBtn.addEventListener("click", () => {
+      const name = customName.value.trim();
+      if (!name) return;
+      setPlayerName(name);
+      window.location.href = "day1.html";
+    });
+  </script>
+</body>
+</html>
